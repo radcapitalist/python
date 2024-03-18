@@ -27,19 +27,19 @@ print("Your mission is to find the treasure.")
 
 #Write your code below this line 👇
 
-in_turn_dir = input('Do you want to turn left or right? ')
+in_turn_dir = input('You are at a crossroads, where do you want to to? Type "left" or "right". ')
 turn_dir = in_turn_dir.lower()
 if turn_dir != 'left':
   print('Fall into a hole.\nGame Over.')
   raise SystemExit
 
-in_swim_or_wait = input('Do you want to swim or wait? ')
+in_swim_or_wait = input('You have come to a lake with an island in the middle. What do you want to do?  Type "swim" or "wait". ')
 swim_or_wait = in_swim_or_wait.lower()
 if swim_or_wait != 'wait':
   print('Attacked by trout.\nGame Over.')
   raise SystemExit
 
-in_door = input('Which door do you want to go through: red, yellow or blue? ')
+in_door = input('You come to a set of 3 doors, one red, one yellow, and one blue. Which door do you want to go through? Type "red", "yellow" or "blue". ')
 door = in_door.lower()
 if door == 'red':
   print('Burned by fire.\nGame Over.')
