@@ -25,11 +25,11 @@ scissors = '''
 ---.__(___)
 '''
 
-graphics = [rock, paper, scissors]
-
 #Write your code below this line 👇
 from random import randint
 from enum import Enum
+
+graphics = [rock, paper, scissors]
 
 class RockPaperScissors(Enum):
     Rock = 0
@@ -61,17 +61,17 @@ if rpsRobot == rpsHuman:
 elif rpsRobot == RockPaperScissors.Rock:
     if rpsHuman == RockPaperScissors.Paper:
         print('You win, Paper covers Rock')
-    else:
+    else: # Human chose Scissors
         print('You lose, Rock crushes Scissors')
 elif rpsRobot == RockPaperScissors.Paper:
     if (rpsHuman == RockPaperScissors.Rock):
         print('You lose, Paper covers Rock')
-    else:
+    else: # Human chose Scissors
         print('You win, Rock crushes Scissors')
-else: # robot chose scissors
+else: # robot chose Scissors
     if (rpsHuman == RockPaperScissors.Rock):
         print('You win, Rock crushes Scissors')
-    else:
+    else: # Human chose Paper
         print('You lose, Scissors cut Paper')
 
 print()
