@@ -50,10 +50,10 @@ except Exception as e:
 nRobot = randint(1, 3)
 rpsRobot = list(RockPaperScissors)[nRobot - 1]
 
+print(f'\n\nYou have chosen:   {str(rpsHuman).split(".")[1]}')
+print(graphics[rpsHuman.value])
 print(f'\nRobot has chosen:  {str(rpsRobot).split(".")[1]}')
 print(graphics[rpsRobot.value])
-print(f'You have chosen:   {str(rpsHuman).split(".")[1]}')
-print(graphics[rpsHuman.value])
 print()
 
 if rpsRobot == rpsHuman:
@@ -67,7 +67,7 @@ elif rpsRobot == RockPaperScissors.Paper:
     if (rpsHuman == RockPaperScissors.Rock):
         print('You lose, Paper covers Rock')
     else: # Human chose Scissors
-        print('You win, Rock crushes Scissors')
+        print('You win, Scissors cut Paper')
 else: # robot chose Scissors
     if (rpsHuman == RockPaperScissors.Rock):
         print('You win, Rock crushes Scissors')
