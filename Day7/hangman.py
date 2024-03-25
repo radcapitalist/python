@@ -39,16 +39,18 @@ print_status()
 print_puzzle()
 
 while not done:
+    msg = ""
     letter = input('Guess a letter: ')
     if letter in correct_guesses or letter in incorrect_guesses:
-        print(f'You already guessed "{letter}"!')
+        msg = f'You already guessed "{letter}"!'
     elif letter in puzzle_lower:
-        print(f'"{letter}" is in the puzzle!')
+        msg = f'"{letter}" is in the puzzle!'
         correct_guesses.append(letter)
     else:
         incorrect_guesses.append(letter)
-        print('"{}" is NOT in the puzzle! You\'ve had {} incorrect guesses.'.format(letter, len(incorrect_guesses)))
+        msg = '"{}" is NOT in the puzzle! You\'ve had {} incorrect guesses.'.format(letter, len(incorrect_guesses))
     clear()
+    print(msg)
     print_status()
     winner = print_puzzle()
     loser = compute_lives() == 0
