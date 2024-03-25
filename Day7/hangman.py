@@ -3,6 +3,7 @@
 import hangman_words as words
 import hangman_art as art
 import random
+from replit import clear
 
 correct_guesses = []
 incorrect_guesses = []
@@ -32,6 +33,7 @@ def print_status():
     print()
 
 done = False;
+clear()
 print(art.logo)
 print_status()
 print_puzzle()
@@ -46,6 +48,7 @@ while not done:
     else:
         incorrect_guesses.append(letter)
         print('"{}" is NOT in the puzzle! You\'ve had {} incorrect guesses.'.format(letter, len(incorrect_guesses)))
+    clear()
     print_status()
     winner = print_puzzle()
     loser = compute_lives() == 0
