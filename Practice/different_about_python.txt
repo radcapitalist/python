@@ -1,3 +1,4 @@
 1. Global variables cannot be changed unless declared
 2. No block scope
 3. No legit const variables
+4. Ability to call C code
