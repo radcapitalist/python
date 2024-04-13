@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 
 launch.json
+
+.python-version
