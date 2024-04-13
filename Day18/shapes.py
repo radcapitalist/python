@@ -1,6 +1,5 @@
 
 from turtle import Turtle, Screen
-import heroes
 from random import randint
 
 colors = ["cornflowerblue", "coral", "purple", "crimson", "lightseagreen", "dimgray", "gold", "magenta"];
