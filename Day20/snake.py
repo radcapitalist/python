@@ -1,6 +1,7 @@
 
 from turtle import Turtle, Screen
 import random
+import time
 
 SPEED = 10
 
@@ -8,14 +9,18 @@ screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
 screen.title("Snake Game")
+screen.tracer(0)
 
 class SnakePart:
+    count = 0
+    colors = ["red", "green", "blue", "white", "purple", "black", "orange", "gold"]
     def __init__(self, clone_from = None):
         if clone_from is None:
             self.turtle = Turtle()
             self.turtle.speed(SPEED)
             self.turtle.shape('square')
-            self.turtle.color('white')
+            self.turtle.color(SnakePart.colors[SnakePart.count])
+            SnakePart.count += 1
             self.turtle.penup()
         else:
             self.turtle = clone_from.get_turtle().clone()
@@ -24,7 +29,7 @@ class SnakePart:
         return self.turtle
     
     def dump(self, name):
-        print(f"{name}:  pos {self.turtle.position()}  heading {self.turtle.heading()}")
+        return f"{name}:  pos {self.turtle.position()}  heading {self.turtle.heading()}"
 
 
 class Food:
@@ -43,12 +48,14 @@ class Snake:
             part.get_turtle().setposition(currxcor, 0)
             currxcor -= 20
             self.parts.append(part)
+        screen.update()
       
     def dump(self):
         for part in self.parts:
             print(f"Part: {part.get_turtle().position()}, color: {part.get_turtle().color()}")
 
     def left(self):
+        print("\nTurning Left\n")
         t = self.parts[0].get_turtle()
         t.setheading((t.heading() + 90) % 360)
         # turn should include 2 moves to keep the tail part from being adjacent to the head portion
@@ -56,6 +63,7 @@ class Snake:
         self.move()
         
     def right(self):
+        print("\nTurning Right\n")
         t = self.parts[0].get_turtle()
         t.setheading((t.heading() - 90 + 360) % 360)
         # turn should include a move so we don't get two turns before a move
@@ -63,12 +71,13 @@ class Snake:
         self.move()
 
     def move(self):
+        print("=============================================")
         print("\nMove\n")
         for i in range(0, len(self.parts)):
-            self.parts[i].dump(str(i))
+            print(f"Before: {self.parts[i].dump(str(i))}")
             t = self.parts[i].get_turtle()
             if i > 0:
-                self.parts[i - 1].dump(str(i - 1))
+                print(f"Ahead:  {self.parts[i - 1].dump(str(i - 1))}")
                 t_prev = self.parts[i-1].get_turtle()
                 # Has the segment in front of me turned?
                 if not t.heading() == t_prev.heading():
@@ -89,7 +98,12 @@ class Snake:
                         else:
                             print(f"{i} needs to catch up")
             t.forward(20)
-        
+            print(f"After:  {self.parts[i].dump(str(i))}\n")
+            #if i < len(self.parts) - 1:
+            #    time.sleep(1.5)
+        print("=============================================")
+        screen.update()
+
 
     def add_segment(self):
         # Clone the last segment
