@@ -4,6 +4,7 @@ import random
 import time
 import math
 import sys
+from scoreboard import Scoreboard
 
 SPEED = 1
 NORTH = 90.0
@@ -189,6 +190,8 @@ def consume_food():
         # Consume the existing food, add a snake segment, and make new food
         food.consume()
         snake.add_segment()
+        # Update the scoreboard
+        scoreboard.increment()
         food = Food()
     else:
         print("Not on food")
@@ -213,7 +216,7 @@ def move_til_done():
         screen.ontimer(move_til_done, 100)
     else:
         print("You lose, game over!")
-        again = screen.textinput(title=f"Game Over!", prompt=f"Game over!\n\nScore: {snake.length()}\n\nPlay again? (Y/N)")
+        again = screen.textinput(title=f"Game Over!", prompt=f"Game over!\n\nPlay again? (Y/N)")
         if again is None:
             again = 'n'
         else:
@@ -222,6 +225,7 @@ def move_til_done():
             screen.listen()
             init_snake()
             init_food()
+            scoreboard.reset()
             move_til_done()
         else:
             sys.exit()
@@ -249,6 +253,7 @@ snake = None
 food = None
 init_snake()
 init_food()
+scoreboard = Scoreboard()
 
 screen.onkey(key="Left", fun=left)
 screen.onkey(key="Right", fun=right)
