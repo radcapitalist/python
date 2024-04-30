@@ -215,7 +215,7 @@ def move_til_done():
         consume_food()
         screen.ontimer(move_til_done, 100)
     else:
-        print("You lose, game over!")
+        scoreboard.update_high_score()
         again = screen.textinput(title=f"Game Over!", prompt=f"Game over!\n\nPlay again? (Y/N)")
         if again is None:
             again = 'n'
