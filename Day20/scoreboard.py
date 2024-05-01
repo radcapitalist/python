@@ -2,6 +2,10 @@
 from turtle import Turtle
 import os
 
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
 SCORE_FONT = "Courier New"
 SCORE_ALIGN = "center"
 SCORE_SIZE = 22
