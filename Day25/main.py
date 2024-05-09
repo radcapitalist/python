@@ -71,10 +71,11 @@ while not exit:
 if exit:
     print(f"\nYou got {len(aCorrect)} states out of 50.")
     df_not_guessed = state_data[~state_data['state'].isin(aCorrect)]
-    aNotGuessed = df_not_guessed["state"].to_list()
+    aNotGuessed = []
     print("\nStates you missed:\n")
-    for state in aNotGuessed:
-        print(state)
+    for (index, row) in df_not_guessed.iterrows():
+        print(row.state)
+        aNotGuessed.append(row.state)
     learn_dict = {
         "state": aNotGuessed
     }
