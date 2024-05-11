@@ -1,10 +1,9 @@
 
 import tkinter
 
-window = tkinter.Tk()
-
 KM_PER_MILE = 1.609344
 
+window = tkinter.Tk()
 window.title("Miles to Kilometers")
 window.minsize(100, 100)
 window.config(padx = 20, pady = 20)
