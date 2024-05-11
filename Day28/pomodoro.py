@@ -24,6 +24,7 @@ FONT_NAME = "Courier"
 WORK_MIN = 5
 SHORT_BREAK_MIN = 1
 LONG_BREAK_MIN = 3
+SECOND = 15
 
 WORK_STATE = "Work"
 SHORT_BREAK_STATE = "Short Break"
@@ -45,7 +46,6 @@ def on_start_clicked():
 def on_reset_clicked():
     global reset
     reset = True
-    print("Reset clicked")
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -115,7 +115,7 @@ def countdown(minutes, seconds):
         if seconds < 0:
             seconds = 59
             minutes -= 1
-        window.after(30, countdown, minutes, seconds)
+        window.after(SECOND, countdown, minutes, seconds)
     else:
         # Our timer has finished.  Change the state and continue timing
         if state is None:
@@ -126,10 +126,10 @@ def countdown(minutes, seconds):
             checks += CHECK
             if rep_count > 0:
                 state = SHORT_BREAK_STATE
-                window.after(30, countdown, SHORT_BREAK_MIN, 0)
+                window.after(SECOND, countdown, SHORT_BREAK_MIN, 0)
             else:
                 state = LONG_BREAK_STATE
-                window.after(30, countdown, LONG_BREAK_MIN, 0)
+                window.after(SECOND, countdown, LONG_BREAK_MIN, 0)
         else: # Must have been in a rest state, time to work again
             # If we just finished a long break, reset the checks
             if state == LONG_BREAK_STATE:
@@ -137,6 +137,6 @@ def countdown(minutes, seconds):
             state = WORK_STATE
             if rep_count == 0:
                 rep_count = 4
-            window.after(15, countdown, WORK_MIN, 0)
+            window.after(SECOND, countdown, WORK_MIN, 0)
         
 window.mainloop()
