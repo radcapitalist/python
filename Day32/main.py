@@ -35,6 +35,7 @@ def get_birthday_message(name):
     return msg
 
 def email_birthday_message(bday_rec):
+    print(f"Sending birthday message to {bday_rec['name']}")
     msg = get_birthday_message(bday_rec['name'])
     with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as connection:
         connection.starttls()
@@ -48,17 +49,27 @@ def email_birthday_message(bday_rec):
 BD_FNAME = 'birthdays.csv'
 birthday_data = pandas.read_csv(BD_FNAME)
 
-list_bdays = [{'name': row['name'], 'email': row.email, 'year': row.year, 'month': row.month, 'day': row.day}
-              for (index, row) in birthday_data.iterrows()]
-
 today = datetime.now()
 month = today.month
 day = today.day
 
-for bday in list_bdays:
-    if bday['month'] == month and bday['day'] == day:
-        print(f"Sending birthday message to {bday['name']}")
-        email_birthday_message(bday)
-    else:
-        print(f"This is not {bday['name']}\'s birthday")
+# list_bdays = [{'name': data_row['name'], 'email': data_row.email, 'year': data_row.year, 'month': data_row.month, 'day': data_row.day}
+#               for (index, data_row) in birthday_data.iterrows()]
 
+
+# for bday in list_bdays:
+#     if bday['month'] == month and bday['day'] == day:
+#         print(f"Sending birthday message to {bday['name']}")
+#         #email_birthday_message(bday)
+#     else:
+#         print(f"This is not {bday['name']}\'s birthday")
+
+birthday_dict = {(data_row.month, data_row.day): data_row
+                 for (index, data_row) in birthday_data.iterrows()}
+
+for key, value in birthday_dict.items():
+    print(value["name"])
+
+if (month, day) in birthday_dict:
+    bday_row = birthday_dict[(month, day)]
+    email_birthday_message(bday_row)
