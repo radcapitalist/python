@@ -162,3 +162,5 @@ cython_debug/
 launch.json
 
 .python-version
+
+.env

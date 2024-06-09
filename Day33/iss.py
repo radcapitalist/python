@@ -25,8 +25,12 @@ EXEC_EVERY = 60.0
 
 def get_iss_position():
     position = None
-    response = requests.get(url=iss_endpoint)
-    if response.status_code == 200:
+    try:
+        response = requests.get(url=iss_endpoint)
+    except Exception:
+        response = None
+    
+    if not response is None and response.status_code == 200:
         latitude = float(response.json()["iss_position"]["latitude"])
         longitude = float(response.json()["iss_position"]["longitude"])
         position = {
