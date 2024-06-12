@@ -6,8 +6,8 @@ from newsapi import NewsApiClient
 
 load_dotenv()
 
-STOCK = "TSLA"
-COMPANY_NAME = "Tesla"
+STOCK = "GME"
+COMPANY_NAME = "GameStop"
 PRICE_API_KEY = os.environ.get("ALPHA_VANTAGE_KEY")
 NEWS_API_KEY = os.environ.get("NEWS_KEY")
 PCT_CHANGE_TRIGGER = 2.0
