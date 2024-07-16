@@ -46,15 +46,32 @@ HN_URL='https://news.ycombinator.com/news'
 response = requests.get(url=HN_URL)
 hn_page = response.text
 soup = BeautifulSoup(hn_page, 'html.parser')
-articles = soup.select('tr td span.titleline a')
+articles = soup.select('tr.athing td span.titleline a')
 points = soup.select('span.score')
 print(f'articles: {len(articles)}   points: {len(points)}')
 
-for article in articles:
-    if not 'from?site' in article.get('href'):
-        article_text = article.getText()
-        article_link = article.get('href')
-        print(f'{article_text}  [{article_link}]')
+article_links = []
+article_text = []
+article_upvotes = []
 
+for index in range(0, len(articles)):
+    article = articles[index]
+    if not 'from?site' in article.get('href'):
+        print(article.getText())
+        article_text.append(article.getText())
+        article_links.append(article.get('href'))
+
+for pindex in range(0, len(points)):
+    point_string = points[pindex].text
+    parts = point_string.split(' ')
+    article_upvotes.append(int(parts[0]))
+
+while len(article_upvotes) < len(article_links):
+    article_upvotes.append(42)
+
+# print(article_links)
+# print(article_text)
+# print(article_upvotes)
+print(f'articles: {len(article_links)}  upvotes: {len(article_upvotes)}')
 
 
